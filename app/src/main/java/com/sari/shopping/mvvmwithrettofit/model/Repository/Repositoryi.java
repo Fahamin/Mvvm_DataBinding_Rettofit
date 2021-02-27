@@ -1,14 +1,21 @@
 package com.sari.shopping.mvvmwithrettofit.model.Repository;
 
 
+import android.app.Application;
+import android.content.Context;
+import android.os.AsyncTask;
 import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 
+import com.sari.shopping.mvvmwithrettofit.MainActivity;
 import com.sari.shopping.mvvmwithrettofit.api.API;
 import com.sari.shopping.mvvmwithrettofit.api.ApiUtils;
+import com.sari.shopping.mvvmwithrettofit.database.MovieDao;
+import com.sari.shopping.mvvmwithrettofit.database.MovieDatabase;
 import com.sari.shopping.mvvmwithrettofit.model.Movie;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -20,13 +27,17 @@ public class Repositoryi {
     private static Repositoryi repository;
     MutableLiveData<List<Movie>> data;
 
-    public Repositoryi() {
+    List<Movie> list;
+    MovieDao dao;
+
+    public Repositoryi(Application context) {
         if (repository != null) {
-            repository = new Repositoryi();
+            repository = new Repositoryi(context);
         }
         data = new MutableLiveData<>();
+        dao = MovieDatabase.getInstance(context).movieDao();
+        list = new ArrayList<>();
     }
-
 
 
     public MutableLiveData<List<Movie>> getlistFromapi() {
@@ -43,8 +54,9 @@ public class Repositoryi {
             public void onResponse(Call<List<Movie>> call, Response<List<Movie>> response) {
                 if (response.isSuccessful()) {
                     data.postValue(response.body());
+                    list = response.body();
 
-                    Log.i("ee",response.message());
+                    Log.i("ee", response.message());
                 }
             }
 
@@ -54,4 +66,7 @@ public class Repositoryi {
             }
         });
     }
+
+
+
 }

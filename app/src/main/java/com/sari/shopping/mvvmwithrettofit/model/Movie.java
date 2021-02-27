@@ -1,25 +1,39 @@
 package com.sari.shopping.mvvmwithrettofit.model;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+@Entity(tableName = "Movie")
 public class Movie {
-
+    @PrimaryKey(autoGenerate = true)
     @SerializedName("postId")
     @Expose
     private Integer postId;
+
+    @ColumnInfo(name = "id")
     @SerializedName("id")
     @Expose
     private Integer id;
+
+    @ColumnInfo(name = "name")
     @SerializedName("name")
     @Expose
     private String name;
+
+    @ColumnInfo(name = "email")
     @SerializedName("email")
     @Expose
     private String email;
+
+    @ColumnInfo(name = "body")
     @SerializedName("body")
     @Expose
     private String body;
+
 
     public Integer getPostId() {
         return postId;
