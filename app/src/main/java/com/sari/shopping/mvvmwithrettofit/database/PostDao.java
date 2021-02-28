@@ -12,15 +12,12 @@ import com.sari.shopping.mvvmwithrettofit.model.PostModel;
 import java.util.List;
 
 @Dao
-public interface MovieDao {
+public interface PostDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    public void insert(List<Movie> movielist);
+    public void insert_post(List<PostModel> postlist);
 
-    @Query("Select * From Movie")
-    public List<Movie> getAllMovie();
-
-
-
+    @Query("Select * From PostModel")
+    public List<PostModel> getAllpost();
 
 }

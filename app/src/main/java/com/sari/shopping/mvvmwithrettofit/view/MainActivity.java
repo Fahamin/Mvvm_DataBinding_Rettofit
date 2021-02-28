@@ -1,4 +1,4 @@
-package com.sari.shopping.mvvmwithrettofit;
+package com.sari.shopping.mvvmwithrettofit.view;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.sari.shopping.mvvmwithrettofit.R;
 import com.sari.shopping.mvvmwithrettofit.adapter.MovieAdapter;
 import com.sari.shopping.mvvmwithrettofit.database.MovieDao;
 import com.sari.shopping.mvvmwithrettofit.database.MovieDatabase;
@@ -72,7 +73,16 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId() == R.id.offlineid)
         {
-            startActivity(new Intent(this,OfflineDataShow.class));
+            startActivity(new Intent(this,OfflineDataShow.class).putExtra("k",1));
+        }
+        if(item.getItemId() == R.id.postActivity)
+        {
+            startActivity(new Intent(this,PostActivity.class));
+        }
+
+        if(item.getItemId() == R.id.offline_postid)
+        {
+            startActivity(new Intent(this,OfflineDataShow.class).putExtra("k",2));
         }
         return super.onOptionsItemSelected(item);
     }

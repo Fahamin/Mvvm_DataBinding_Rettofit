@@ -2,20 +2,17 @@ package com.sari.shopping.mvvmwithrettofit.model.Repository;
 
 
 import android.app.Application;
-import android.content.Context;
-import android.os.AsyncTask;
 import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 
-import com.sari.shopping.mvvmwithrettofit.MainActivity;
 import com.sari.shopping.mvvmwithrettofit.api.API;
 import com.sari.shopping.mvvmwithrettofit.api.ApiUtils;
 import com.sari.shopping.mvvmwithrettofit.database.MovieDao;
 import com.sari.shopping.mvvmwithrettofit.database.MovieDatabase;
 import com.sari.shopping.mvvmwithrettofit.model.Movie;
+import com.sari.shopping.mvvmwithrettofit.model.PostModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -26,8 +23,9 @@ public class Repositoryi {
     API api;
     private static Repositoryi repository;
     MutableLiveData<List<Movie>> data;
+    MutableLiveData<List<PostModel>> postData;
 
-    List<Movie> list;
+
     MovieDao dao;
 
     public Repositoryi(Application context) {
@@ -35,8 +33,12 @@ public class Repositoryi {
             repository = new Repositoryi(context);
         }
         data = new MutableLiveData<>();
+        postData = new MutableLiveData<>();
+
         dao = MovieDatabase.getInstance(context).movieDao();
-        list = new ArrayList<>();
+
+        api = ApiUtils.getAPIService();
+
     }
 
 
@@ -45,8 +47,31 @@ public class Repositoryi {
         return data;
     }
 
+    public MutableLiveData<List<PostModel>> getPostData() {
+        getpostList();
+        return postData;
+    }
+
+    private void getpostList() {
+        Call<List<PostModel>> call = api.getAllPost();
+
+        call.enqueue(new Callback<List<PostModel>>() {
+            @Override
+            public void onResponse(Call<List<PostModel>> call, Response<List<PostModel>> response) {
+                if(response.isSuccessful())
+                {
+                    postData.postValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<PostModel>> call, Throwable t) {
+
+            }
+        });
+    }
+
     public void getList() {
-        api = ApiUtils.getAPIService();
         Call<List<Movie>> call = api.getAllList();
 
         call.enqueue(new Callback<List<Movie>>() {
@@ -54,7 +79,6 @@ public class Repositoryi {
             public void onResponse(Call<List<Movie>> call, Response<List<Movie>> response) {
                 if (response.isSuccessful()) {
                     data.postValue(response.body());
-                    list = response.body();
 
                     Log.i("ee", response.message());
                 }
@@ -66,7 +90,6 @@ public class Repositoryi {
             }
         });
     }
-
 
 
 }

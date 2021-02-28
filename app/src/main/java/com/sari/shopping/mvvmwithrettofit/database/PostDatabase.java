@@ -11,16 +11,16 @@ import com.sari.shopping.mvvmwithrettofit.model.Movie;
 import com.sari.shopping.mvvmwithrettofit.model.PostModel;
 
 
-@Database(entities = {Movie.class}, version = 1, exportSchema = false)
-public abstract class MovieDatabase extends RoomDatabase {
+@Database(entities = {PostModel.class}, version = 2, exportSchema = false)
+public abstract class PostDatabase extends RoomDatabase {
 
-    public abstract MovieDao movieDao();
-    public static MovieDatabase instance;
+    public abstract PostDao postDao();
+    public static PostDatabase instance;
 
-    public static MovieDatabase getInstance(Context context) {
+    public static PostDatabase getInstance(Context context) {
         if (instance == null) {
-            instance = Room.databaseBuilder(context.getApplicationContext(), MovieDatabase.class,
-                    "movieDatabase").allowMainThreadQueries().build();
+            instance = Room.databaseBuilder(context.getApplicationContext(), PostDatabase.class,
+                    "postDatabase").allowMainThreadQueries().build();
         }
 
         return instance;

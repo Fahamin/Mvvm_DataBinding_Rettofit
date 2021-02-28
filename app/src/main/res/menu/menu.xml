@@ -3,6 +3,16 @@
 
     <item
         android:id="@+id/offlineid"
-        android:title="OfflineData"
+        android:title="OfflineMovieData"
+        ></item>
+
+    <item
+        android:id="@+id/postActivity"
+        android:title="postActivity"
+        ></item>
+
+    <item
+        android:id="@+id/offline_postid"
+        android:title="OfflinePOstData"
         ></item>
 </menu>

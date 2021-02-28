@@ -7,41 +7,35 @@ import androidx.room.PrimaryKey;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-@Entity(tableName = "Movie")
-public class Movie {
+@Entity(tableName = "PostModel")
+public class PostModel {
 
     @PrimaryKey(autoGenerate = true)
-    @SerializedName("postId")
+    @SerializedName("userId")
     @Expose
-    private Integer postId;
+    private Integer userId;
 
     @ColumnInfo(name = "id")
     @SerializedName("id")
     @Expose
     private Integer id;
 
-    @ColumnInfo(name = "name")
-    @SerializedName("name")
+    @ColumnInfo(name = "title")
+    @SerializedName("title")
     @Expose
-    private String name;
-
-    @ColumnInfo(name = "email")
-    @SerializedName("email")
-    @Expose
-    private String email;
+    private String title;
 
     @ColumnInfo(name = "body")
     @SerializedName("body")
     @Expose
     private String body;
 
-
-    public Integer getPostId() {
-        return postId;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setPostId(Integer postId) {
-        this.postId = postId;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public Integer getId() {
@@ -52,20 +46,12 @@ public class Movie {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getBody() {
@@ -75,5 +61,6 @@ public class Movie {
     public void setBody(String body) {
         this.body = body;
     }
+
 
 }
